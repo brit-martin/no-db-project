@@ -1,14 +1,17 @@
 import './Card.css'
-export default function Card(){
+export default function Card(props){
+
+
+
+
     return (
         <>
             <div>
-            <img/>
-            <label htmlFor={'item-input'}>Item: </label>
-            <input id={'item-input'} type= {'text'}/>
+            
+            <label htmlFor={'item-input'}>Item: {props.item}</label>
 
-            <label htmlFor={'how-many-input'}>How many: </label>
-            <input id={'how-many-input'} type= {'text'}/>
+            <label htmlFor={'how-many-input'}>How many: {props.howMany}</label>
+            
             </div>
         </>
     )
