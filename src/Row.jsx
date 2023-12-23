@@ -8,6 +8,9 @@ export default function Row(props){
 let [inputItem, setInputItem] = useState('')
 let [inputHowMany, setInputHowMany] = useState('')
 
+let [addItem, setAddItem] = useState('')
+let [addHowMany, setAddHowMany] = useState('')
+
 function handleEditClick(){
     axios.put(`/edit-jewelry/${inputItem}/${inputHowMany}`)
     .then((response) => {
@@ -16,6 +19,24 @@ function handleEditClick(){
     .catch((error) => {
         console.log(error)
     })
+}
+
+function handleAddClick(){
+    let myBody = {
+        item: addItem.value,
+        howMany: +addHowMany.value
+    }
+
+    axios.post('/add-jewelry', myBody)
+        .then((response) => {
+            props.setCardData(response.data)
+            setAddItem('')
+            setAddHowMany('')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
 }
 
     return (
@@ -35,7 +56,7 @@ function handleEditClick(){
                 value= {inputHowMany} 
                 onChange={(e) => setInputHowMany(e.target.value)}/>
 
-            <button>Add</button>
+            <button onClick ={handleAddClick}>Add</button>
             <button onClick={handleEditClick}>Edit</button>
             <button>Delete</button>
         </>

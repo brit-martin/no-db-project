@@ -5,6 +5,8 @@ const app = express()
 
 app.use(express.json())
 
+let newGlobalId = 4
+
 const db = [
     {
         item: 'Gold Hoops',
@@ -42,7 +44,16 @@ app.put('/edit-jewelry/:item/:howMany', (req, res) => {
         res.status(200).send(db)
 })
 
+app.post('/add-jewelry', (req, res) => {
+    let newJewelry = req.body
 
+    newJewelry.id = newGlobalId
+    newGlobalId ++
+
+    db.push(newJewelry)
+
+    res.status(200).send(db)
+})
 
 
 
