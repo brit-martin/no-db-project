@@ -1,3 +1,10 @@
 body {
-    border: 2px solid white;
+    border: 15px double white;
+}
+
+.card {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid white;
+    margin: 10px;
 }

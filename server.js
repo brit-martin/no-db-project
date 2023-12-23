@@ -31,9 +31,8 @@ app.get('/jewelry', (req, res) => {
 
 app.put('/edit-jewelry/:item/:howMany', (req, res) => {
     let item = req.params.item
-    console.log(item)
     let quantity = +req.params.howMany
-    console.log(quantity)
+    
 
     for (let i =0; i < db.length; i ++) {
         if (db[i].item === item){
@@ -55,6 +54,17 @@ app.post('/add-jewelry', (req, res) => {
     res.status(200).send(db)
 })
 
+app.delete('/delete-jewelry/:item', (req, res) => {
+    let item = req.params.item
+    console.log(item)
+    for (let i =0; i <db.length; i++) {
+        if (db[i].item === item) {
+            db.splice(i, 1)
+        }
+    }
+
+    res.status(200).send(db)
+})
 
 
 

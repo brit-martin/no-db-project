@@ -10,9 +10,14 @@ let [inputHowMany, setInputHowMany] = useState('')
 
 
 function handleEditClick(){
+    alert('Item has been updated')
     axios.put(`/edit-jewelry/${inputItem}/${inputHowMany}`)
     .then((response) => {
         props.setCardData(response.data)
+        setInputItem('')
+        setInputHowMany('')
+        
+
     })
     .catch((error) => {
         console.log(error)
@@ -20,11 +25,11 @@ function handleEditClick(){
 }
 
 function handleAddClick(){
+    alert('Item is added')
     let myBody = {
         item: inputItem,
         howMany: +inputHowMany
     }
-    console.log(myBody)
     axios.post('/add-jewelry', myBody)
         .then((response) => {
             props.setCardData(response.data)
@@ -35,6 +40,20 @@ function handleAddClick(){
             console.log(error)
         })
 
+}
+
+function handleDeleteClick(){
+    alert('Item is deleted')
+    axios.delete(`/delete-jewelry/${inputItem}`)
+        .then((response) => {
+            props.setCardData(response.data)
+            setInputItem('')
+            setInputHowMany('')
+        
+        })
+        .catch ((error) => {
+            console.log(error)
+        })
 }
 
     return (
@@ -56,7 +75,7 @@ function handleAddClick(){
 
             <button onClick ={handleAddClick}>Add</button>
             <button onClick={handleEditClick}>Edit</button>
-            <button>Delete</button>
+            <button onClick={handleDeleteClick}>Delete</button>
         </>
     )
 }
